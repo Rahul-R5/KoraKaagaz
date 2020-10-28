@@ -177,7 +177,7 @@ public bool run()
 - Dev can  then can use the Test harness class to run the tests to their usuage and convinence.
 
 
-### Responsibility:
+### Responsibility or Partition of tasks for me:
 - 1.Constructing the Test Harness function runByPriority
 - 2.Constructing and building the Test Harness functions runByCategory 
 - 3.Verifying the smooth functioning pf those assembler functions 

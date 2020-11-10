@@ -39,7 +39,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 	 */
 	private String username;
 	
-	/*
+	/**
 	 * This variable will store the image accessed by mapImage corresponding to username 
 	 */
 	private String userimage;

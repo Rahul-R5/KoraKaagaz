@@ -15,19 +15,19 @@ import java.util.HashMap;
 public class NetworkMessageHandler implements INotificationHandler {
 	
 	/**
-	 * Creating instance of ContentCommunicator class to access map handler and image map
+	 * Creating instance of ContentCommunicator class to access handler map and image map
 	 */
 	private ContentCommunicator cc = ContentFactory.getContentCommunicator();
 	
 	/**
-	 * Accessing mapHandler hashmap from ContentCommunicator class to use it for sending message to UI
+	 * Accessing handlerMap hashmap from ContentCommunicator class to use it for sending message to UI
 	 */
-	private HashMap<String, IContentNotificationHandler> mapHandler = cc.getMapHandler();
+	private HashMap<String, IContentNotificationHandler> handlerMap = cc.getHandlerMap();
 	
 	/**
-	 * Accessing mapImage hashmap from ContentCommunicator class to access image corresponding to username
+	 * Accessing imageMap hashmap from ContentCommunicator class to access image corresponding to username
 	 */
-	private HashMap<String, String> mapImage = cc.getMapImage();
+	private HashMap<String, String> imageMap = cc.getImageMap();
 	
 	/**
 	 * This variable will store the meta field of json string sent by the Networking module
@@ -40,7 +40,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 	private String username;
 	
 	/**
-	 * This variable will store the image accessed by mapImage corresponding to username 
+	 * This variable will store the image accessed by imageMap corresponding to username 
 	 */
 	private String userimage;
 	
@@ -62,10 +62,10 @@ public class NetworkMessageHandler implements INotificationHandler {
 	public void onMessageReceived(String message) {
 		JSONObject jsonObject = new JSONObject(message);
 		metafield = jsonObject.getString("meta");
-		handler = mapHandler.get("UI");
+		handler = handlerMap.get("UI");
 		jsonObject.remove("meta");
 		username = jsonObject.getString("username");
-		userimage = mapImage.get(username);
+		userimage = imageMap.get(username);
 		jsonObject.put("image", userimage);
 		
 		if(metafield.equals("newUser")) {

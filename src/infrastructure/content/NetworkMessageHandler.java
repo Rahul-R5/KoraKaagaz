@@ -3,8 +3,6 @@ package infrastructure.content;
 import networking.INotificationHandler;
 import org.json.JSONObject;
 import java.util.HashMap;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import infrastructure.validation.logger.ILogger;
 import infrastructure.validation.logger.LogLevel;
 import infrastructure.validation.logger.LoggerFactory;
@@ -68,12 +66,13 @@ public class NetworkMessageHandler implements INotificationHandler {
 	/**
 	 * @param String message - JSON string message (Meta fields are newUser or message or userExit)
 	 *
-	 * if meta field is newUser, then remaining field would only be username.
-	 * if meta field is message, then remaining fields would be username, message and time
-	 * if meta field is exitUser, then remaining field would only be username
+	 * if meta field is newUser, then remaining field of parameter message would only be username,  
+	 * to send this message to UI removing metafield, adding image and then calling @onNewUserJoined() method
+	 * if meta field is message, then remaining fields of parameter message would be username, message and time, 
+	 * to send this message to UI removing metafield, adding image and then calling @onMessageReceived() method
+	 * if meta field is exitUser, then remaining field of parameter message would only be username, 
+	 * to send this message to UI removing metafield, adding image and then calling @onNewUserJoined() method
 	 * Networking module will be calling this method with json string message to send data to the content module
-	 *
-	 * meta field will be removed and image field will be added and then string will be sent to UI
 	 *
 	 * creating error log message if message in not converting into json object,
 	 * or if not able extract field from object, or if not able to extract handler from hashmap (handlerMap)
@@ -85,9 +84,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			JSONObject jsonObject = new JSONObject(message);
 		} 
 		catch(Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			logMessage = "content: "+sw.toString();
+			logMessage = "failed to extract message parameter";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -96,9 +93,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			metafield = jsonObject.getString("meta");
 		}
 		catch(Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			logMessage = "content: "+sw.toString();
+			logMessage = "failed to get metafield of message parameter";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -107,9 +102,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			handler = handlerMap.get("UI");
 		}
 		catch(Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			logMessage = "content: "+sw.toString();
+			logMessage = "failed to get IContentNotification handler from handlerMap";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -118,9 +111,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			username = jsonObject.getString("username");
 		}
 		catch(Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			logMessage = "content: "+sw.toString();
+			logMessage = "failed to get username field of message parameter";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -129,9 +120,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			userimage = imageMap.get(username);
 		}
 		catch(Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			logMessage = "content: "+sw.toString();
+			logMessage = "failed to get image from imageMap";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -141,19 +130,22 @@ public class NetworkMessageHandler implements INotificationHandler {
 		
 		if(metafield.equals("newUser")) {
 			handler.onNewUserJoined(jsonObject.toString());
-			logMessage = "content: message successfully passed to UI";
-			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.SUCCESS, logMessage);
+			logMessage = "onNewUserJoined() called";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 		}
 		else if(metafield.equals("message")) {
 			handler.onMessageReceived(jsonObject.toString());
-			logMessage = "content: message successfully passed to UI";
-			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.SUCCESS, logMessage);
+			logMessage = "onMessageReceived() called";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 		}
 		else if (metafield.equals("userExit")) {
 			handler.onUserExit(jsonObject.toString());
-			logMessage = "content: message successfully passed to UI";
-			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.SUCCESS, logMessage);
+			logMessage = "onUserExit() called";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 		}
-		else {}
+		else {
+			logMessage = "no method with this name exists";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
+		}
 	}
 }

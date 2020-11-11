@@ -84,7 +84,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			JSONObject jsonObject = new JSONObject(message);
 		} 
 		catch(Exception e) {
-			logMessage = "failed to extract message parameter";
+			logMessage = "converting JSON string to JSON object process failed";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -93,7 +93,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			metafield = jsonObject.getString("meta");
 		}
 		catch(Exception e) {
-			logMessage = "failed to get metafield of message parameter";
+			logMessage = "failed to get metafield data of message parameter";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}
@@ -111,7 +111,7 @@ public class NetworkMessageHandler implements INotificationHandler {
 			username = jsonObject.getString("username");
 		}
 		catch(Exception e) {
-			logMessage = "failed to get username field of message parameter";
+			logMessage = "failed to get username field data of message parameter";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.ERROR, logMessage);
 			return;
 		}

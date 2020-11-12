@@ -11,7 +11,7 @@ import infrastructure.validation.logger.ModuleID;
 
 /**
  * NetworkMessageHandler class implements the INotificationHandler interface.
- * this includes one method i.e @onMessageReceived()
+ * this includes one method i.e onMessageReceived()
  * this class is used to notify and to send data to the UI module 
  * as new user joined or as a user exit or as message sent by a user
  * 

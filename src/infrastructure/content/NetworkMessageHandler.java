@@ -170,15 +170,16 @@ public class NetworkMessageHandler implements INotificationHandler {
 				if(!imageMap.containsKey(username)) {
 					jsonObject.put("username", username);
 					jsonObject.put("image", userimage);
-					handler.onNewUserJoined(jsonObject.toString());
-					logMessage = "onNewUserJoined called";
-					logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 				}
 			}
 			
 			ContentCommunicator.setImageMap(imagemap);
 			logMessage = "imageMap updated successfully";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.SUCCESS, logMessage);
+			
+			handler.onNewUserJoined(jsonObject.toString());
+			logMessage = "onNewUserJoined called";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 		}
 		else if(metafield.equals("message")) {
 			logMessage = "Message case";
@@ -228,14 +229,14 @@ public class NetworkMessageHandler implements INotificationHandler {
 				return;
 			}
 			jsonObject.put("image", userimage);
-			handler.onUserExit(jsonObject.toString());
-			logMessage = "onUserExit called";
-			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
-			
 			imageMap.remove(username);
 			ContentCommunicator.setImageMap(imageMap);
 			logMessage = "imageMap updated successfully";
 			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.SUCCESS, logMessage);
+			
+			handler.onUserExit(jsonObject.toString());
+			logMessage = "onUserExit called";
+			logger.log(ModuleID.INFRASTRUCTURE, LogLevel.INFO, logMessage);
 		}
 		else {
 			logMessage = "no method with this name exists";

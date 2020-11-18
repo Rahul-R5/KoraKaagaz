@@ -57,20 +57,26 @@ public class TestHarness{
   */
   public void runByCategory(String Category){
     String path = "../../../" + Category + "/tests";
-    File directoryPath = new File(path);
-    //get all the test cases in tests directory of respective category 
-    String tests[] = directoryPath.list();
+    try{
+		  File directoryPath = new File(path);
+		  //get all the test cases in tests directory of respective category 
+		  String tests[] = directoryPath.list();
 
-    //create object of each test case class to run and get the result of each test
-    for(int i =0; i<tests.length; i++){
-      String[] arrOfStr = tests[i].split(".", 2); 
-      String testClassName = arrOfStr[0];
-      Class<?> testClass = Class.forName("testClassName");
-      Object test = testClass.getDeclaredConstructor().newInstance();
-      if(Category.equals(test.getCategory())){
-        boolean result = test.run();
-      }
-    }
+		  //create object of each test case class to run and get the result of each test
+		  for(int i =0; i<tests.length; i++){
+		    String[] arrOfStr = tests[i].split(".", 2); 
+		    String testClassName = arrOfStr[0];
+		    Class<?> testClass = Class.forName("testClassName");
+		    Object test = testClass.getDeclaredConstructor().newInstance();
+		    if(Category.equals(test.getCategory())){
+		      boolean result = test.run();
+		    }
+		  }
+	  }
+	  catch (Exception e){
+	    System.out.println("Exception in module: "+Category+" >> "+e);
+		}
+	  
 
     //result logging
   }

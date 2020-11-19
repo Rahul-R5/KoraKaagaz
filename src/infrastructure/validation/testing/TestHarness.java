@@ -60,12 +60,17 @@ public class TestHarness{
   * @param Category    The name of the category of tests to be run
   */
   public void runByCategory(String Category){
+    int totalNumberOfTests = 0;
+    int successfulNumberOfTests = 0;
+    int failedNumberOfTests = 0;
+    
     String path = "../../../" + Category + "/tests";
     try{
 		  File directoryPath = new File(path);
 		  //get all the test cases in tests directory of respective category 
 		  String tests[] = directoryPath.list();
-
+      totalNumberOfTests = tests.length;
+      
 		  //create object of each test case class to run and get the result of each test
 		  for(int i =0; i<tests.length; i++){
 		    String[] arrOfStr = tests[i].split(".", 2); 
@@ -74,6 +79,19 @@ public class TestHarness{
 		    Object test = testClass.getDeclaredConstructor().newInstance();
 		    if(Category.equals(test.getCategory())){
 		      boolean result = test.run();
+
+          if(result==false){
+            failedNumberOfTests++;
+            if(failedNumberOfTests==1){
+              logger.log("", "", "Failed Tests...");
+            }
+          //log the result of failed test cases
+          logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+          }
+          else{
+            successfulNumberOfTests++;
+          }
+        
 		    }
 		  }
 	  }
@@ -81,8 +99,11 @@ public class TestHarness{
 	    System.out.println("Exception in module: "+Category+" >> "+e);
 		}
 	  
-
     //result logging
+    logger.log("", "", "\nOverall Result:");
+    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   }
 
 
@@ -91,8 +112,14 @@ public class TestHarness{
   * @param Category    The name of the category of tests to be run
   */
   public void runBypriority(int priority){
+    int totalNumberOfTests = 0;
+    int successfulNumberOfTests = 0;
+    int failedNumberOfTests = 0;
+    
     //get list of all the tests using helper static method getAllTests()
     ArrayList<File> allTests = getAllTests();
+    totalNumberOfTests = allTests.size();
+    
     for (File testFile : allTests){
       String testName = testFile.getName();
       String[] arrOfStr = testName.split(".", 2); 
@@ -100,11 +127,28 @@ public class TestHarness{
       Class<?> testClass = Class.forName("testClassName");
       Object test = testClass.getDeclaredConstructor().newInstance();
       if(priority==(test.getPriority())){
-         boolean result = test.run();   
-      } 
-    }
-    
+         boolean result = test.run(); 
+         
+         if(result==false){
+          failedNumberOfTests++;
+          if(failedNumberOfTests==1){
+            logger.log("", "", "Failed Tests...");
+          }
+          //log the result of failed test cases
+          logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+        }
+        else{
+          successfulNumberOfTests++;
+        }
+        
+      }  
+    } 
+      
     //result logging
+    logger.log("", "", "\nOverall Result:");
+    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   }
 
 
@@ -129,7 +173,8 @@ public class TestHarness{
       String testClassName = arrOfStr[0];
       Class<?> testClass = Class.forName("testClassName");
       Object test = testClass.getDeclaredConstructor().newInstance();
-      boolean result = test.run();   
+      boolean result = test.run();  
+       
       if(result==false){
         failedNumberOfTests++;
         if(failedNumberOfTests==1){
@@ -159,13 +204,35 @@ public class TestHarness{
   *     <code>false</code> otherwise.
   */
   public boolean runByName(String testName){
+    int totalNumberOfTests = 0;
+    int successfulNumberOfTests = 0;
+    int failedNumberOfTests = 0;
+    
+    totalNumberOfTests = 1;
     String[] arrOfStr = testName.split(".", 2); 
     String testClassName = arrOfStr[0];
     Class<?> testClass = Class.forName("testClassName");
     Object test = testClass.getDeclaredConstructor().newInstance();
     boolean result = test.run();
     
-    //after saving the result using logger
+    if(result==false){
+      failedNumberOfTests++;
+      if(failedNumberOfTests==1){
+        logger.log("", "", "Failed Tests...");
+      }
+      //log the result of failed test cases
+      logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+    }
+    else{
+     successfulNumberOfTests++;
+    }
+    
+    //result logging 
+    logger.log("", "", "\nOverall Result:");
+    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+    
     return result;
   }
 

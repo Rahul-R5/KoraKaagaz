@@ -33,23 +33,23 @@ public class TestHarness{
   private static ArrayList<File> getAllTests(){
     File[] modules = new File("../../../").listFiles(File::isDirectory);
     ArrayList<File> allTests = new ArrayList<File>();
-		for(File module : modules){
-		  if(module.isDirectory()){
-		  	String strModule = module.getName();
-		  	System.out.println(strModule);
-			  try {
-			    File f = new File("src/"+strModule+"/tests/");
-				  File[] tests  = f.listFiles(File::isFile);
-				  for (File test : tests){
-					  if(test.getName().endsWith("Test.java")){
-						  allTests.add(test); 
-					  }
-				  } 
-	    	}
-	    	catch (Exception e){
-	  		  System.out.println("Exception in module: "+strModule+" >> "+e);
-		    }
-		  }
+    for(File module : modules){
+      if(module.isDirectory()){
+        String strModule = module.getName();
+        System.out.println(strModule);
+        try {
+          File f = new File("src/"+strModule+"/tests/");
+          File[] tests  = f.listFiles(File::isFile);
+          for (File test : tests){
+            if(test.getName().endsWith("Test.java")){
+              allTests.add(test); 
+            }
+          } 
+        }
+        catch (Exception e){
+          System.out.println("Exception in module: "+strModule+" >> "+e);
+        }
+      }
     } 
     return allTests;
   }
@@ -66,19 +66,19 @@ public class TestHarness{
     
     String path = "../../../" + Category + "/tests";
     try{
-		  File directoryPath = new File(path);
-		  //get all the test cases in tests directory of respective category 
-		  String tests[] = directoryPath.list();
+      File directoryPath = new File(path);
+      //get all the test cases in tests directory of respective category 
+      String tests[] = directoryPath.list();
       totalNumberOfTests = tests.length;
       
-		  //create object of each test case class to run and get the result of each test
-		  for(int i =0; i<tests.length; i++){
-		    String[] arrOfStr = tests[i].split(".", 2); 
-		    String testClassName = arrOfStr[0];
-		    Class<?> testClass = Class.forName("testClassName");
-		    Object test = testClass.getDeclaredConstructor().newInstance();
-		    if(Category.equals(test.getCategory())){
-		      boolean result = test.run();
+      //create object of each test case class to run and get the result of each test
+      for(int i =0; i<tests.length; i++){
+        String[] arrOfStr = tests[i].split(".", 2); 
+        String testClassName = arrOfStr[0];
+        Class<?> testClass = Class.forName("testClassName");
+        Object test = testClass.getDeclaredConstructor().newInstance();
+        if(Category.equals(test.getCategory())){
+          boolean result = test.run();
 
           if(result==false){
             failedNumberOfTests++;
@@ -92,12 +92,12 @@ public class TestHarness{
             successfulNumberOfTests++;
           }
         
-		    }
-		  }
-	  }
-	  catch (Exception e){
-	    System.out.println("Exception in module: "+Category+" >> "+e);
-		}
+        }
+      }
+    }
+    catch (Exception e){
+      System.out.println("Exception in module: "+Category+" >> "+e);
+    }
 	  
     //result logging
     logger.log("", "", "\nOverall Result:");

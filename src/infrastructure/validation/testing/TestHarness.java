@@ -33,6 +33,9 @@ public class TestHarness{
   private static ArrayList<File> getAllTests(){
     File[] modules = new File("../../../").listFiles(File::isDirectory);
     ArrayList<File> allTests = new ArrayList<File>();
+    
+    ILogger logger = LoggerFactory.getLoggerInstance();
+    
     for(File module : modules){
       if(module.isDirectory()){
         String strModule = module.getName();
@@ -46,8 +49,10 @@ public class TestHarness{
             }
           } 
         }
+        //If any module does not content test directory or test directory is empty
         catch (Exception e){
-          System.out.println("Exception in module: "+strModule+" >> "+e);
+          logger.log(ModuleID.TEST, LogLevel.WARNING, "Exception in module: "+strModule+" >> "+e);      	
+          //System.out.println("Exception in module: "+strModule+" >> "+e);
         }
       }
     } 
@@ -63,6 +68,8 @@ public class TestHarness{
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
+    
+    ILogger logger = LoggerFactory.getLoggerInstance();
     
     String path = "../../../" + Category + "/tests";
     try{
@@ -115,6 +122,8 @@ public class TestHarness{
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
+    
+    ILogger logger = LoggerFactory.getLoggerInstance();
     
     //get list of all the tests using helper static method getAllTests()
     ArrayList<File> allTests = getAllTests();
@@ -207,6 +216,8 @@ public class TestHarness{
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
+    
+    ILogger logger = LoggerFactory.getLoggerInstance();
     
     totalNumberOfTests = 1;
     String[] arrOfStr = testName.split(".", 2); 

@@ -1,4 +1,4 @@
-/**
+/*
  * @author        Abhishek Saran, Manas Sanjay
  * @module        Infrastructure module 
  * @team          Test Harness
@@ -83,10 +83,10 @@ public class TestHarness{
           if(result==false){
             failedNumberOfTests++;
             if(failedNumberOfTests==1){
-              logger.log("", "", "Failed Tests...");
+              logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
             }
           //log the result of failed test cases
-          logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
           }
           else{
             successfulNumberOfTests++;
@@ -100,10 +100,10 @@ public class TestHarness{
     }
 	  
     //result logging
-    logger.log("", "", "\nOverall Result:");
-    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   }
 
 
@@ -132,10 +132,10 @@ public class TestHarness{
          if(result==false){
           failedNumberOfTests++;
           if(failedNumberOfTests==1){
-            logger.log("", "", "Failed Tests...");
+            logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
           }
           //log the result of failed test cases
-          logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
         }
         else{
           successfulNumberOfTests++;
@@ -145,10 +145,10 @@ public class TestHarness{
     } 
       
     //result logging
-    logger.log("", "", "\nOverall Result:");
-    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   }
 
 
@@ -178,10 +178,10 @@ public class TestHarness{
       if(result==false){
         failedNumberOfTests++;
         if(failedNumberOfTests==1){
-          logger.log("", "", "Failed Tests...");
+          logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
         }
         //log the result of failed test cases
-        logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+        logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
       }
       else{
        successfulNumberOfTests++;
@@ -189,10 +189,10 @@ public class TestHarness{
     }
     
     //result logging 
-    logger.log("", "", "\nOverall Result:");
-    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   } 
 	 
 	  
@@ -218,20 +218,20 @@ public class TestHarness{
     if(result==false){
       failedNumberOfTests++;
       if(failedNumberOfTests==1){
-        logger.log("", "", "Failed Tests...");
+        logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
       }
       //log the result of failed test cases
-      logger.log("", "", Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+      logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
     }
     else{
      successfulNumberOfTests++;
     }
     
     //result logging 
-    logger.log("", "", "\nOverall Result:");
-    logger.log("", "", "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-    logger.log("", "", "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-    logger.log("", "", "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
     
     return result;
   }

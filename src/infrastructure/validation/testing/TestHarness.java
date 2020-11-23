@@ -182,7 +182,7 @@ public class TestHarness{
     ArrayList<File> allTests = getAllTests();
     
     try{
-	    totalNumberOfTests = allTests.size(); 
+      totalNumberOfTests = allTests.size(); 
       for (File testFile : allTests){
         //Get full qualified class name from absolute path of testcase
         String absPath =  testFile.getAbsolutePath();

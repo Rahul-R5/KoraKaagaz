@@ -116,7 +116,7 @@ public class TestHarness{
   * Void method to run test case of a given priority
   * @param Priority The priority level of the test to be run
   */
-  public void runBypriority(int priority){
+  public void runByPriority(int priority){
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;

@@ -78,10 +78,16 @@ public class TestHarness{
       
       //create object of each test case class to run and get the result of each test
       for(int i=0; i<tests.length; i++){
-        String[] arrOfStr = tests[i].split(".", 2); 
-        String testClassName = arrOfStr[0];
-        Class<?> testClass = Class.forName("testClassName");
+      	//Get full qualified class name from absolute path of testcase
+		    String absPath = tests[i].getAbsolutePath();
+			 	String[] arrOfStr = absPath.split("src/", 2); 
+			 	arrOfStr = arrOfStr[1].split(".java", 2);
+			 	String relPath = arrOfStr[0];
+			 	String fullQualifiedClassName = relPath.replace("/",".");
+
+        Class<?> testClass = Class.forName(fullQualifiedClassName);
         Object test = testClass.getDeclaredConstructor().newInstance();
+        
         if(category.equals(test.getCategory())){
           boolean result = test.run();
 
@@ -114,7 +120,7 @@ public class TestHarness{
 
  /**
   * Void method to run test case of a given priority
-  * @param Priority The priority level of the test to be run
+  * @param priority The priority level of the test to be run
   */
   public void runByPriority(int priority){
     int totalNumberOfTests = 0;
@@ -128,11 +134,16 @@ public class TestHarness{
     totalNumberOfTests = allTests.size();
     
     for (File testFile : allTests){
-      String testName = testFile.getName();
-      String[] arrOfStr = testName.split(".", 2); 
-      String testClassName = arrOfStr[0];
-      Class<?> testClass = Class.forName("testClassName");
+    	//Get full qualified class name from absolute path of testcase
+	    String absPath =  testFile.getAbsolutePath();
+		 	String[] arrOfStr = absPath.split("src/", 2); 
+		 	arrOfStr = arrOfStr[1].split(".java", 2);
+		 	String relPath = arrOfStr[0];
+		 	String fullQualifiedClassName = relPath.replace("/",".");
+
+      Class<?> testClass = Class.forName(fullQualifiedClassName);
       Object test = testClass.getDeclaredConstructor().newInstance();
+      
       if(priority == (test.getPriority())){
          boolean result = test.run(); 
          
@@ -174,10 +185,14 @@ public class TestHarness{
     totalNumberOfTests = allTests.size();
     
     for (File testFile : allTests){
-      String testName = testFile.getName();
-      String[] arrOfStr = testName.split(".", 2); 
-      String testClassName = arrOfStr[0];
-      Class<?> testClass = Class.forName("testClassName");
+    	//Get full qualified class name from absolute path of testcase
+	    String absPath =  testFile.getAbsolutePath();
+		 	String[] arrOfStr = absPath.split("src/", 2); 
+		 	arrOfStr = arrOfStr[1].split(".java", 2);
+		 	String relPath = arrOfStr[0];
+		 	String fullQualifiedClassName = relPath.replace("/",".");
+
+      Class<?> testClass = Class.forName(fullQualifiedClassName);
       Object test = testClass.getDeclaredConstructor().newInstance();
       boolean result = test.run();  
        
@@ -204,9 +219,9 @@ public class TestHarness{
 	  
  /**
   * Boolean method to give result of the Test Case Class
-  * @param testName The absolute path to file name of test case class including .java extension as a string
+  * @param testNamePath The absolute path to file name of test case class including .java extension as a string
   */
-  public boolean runByName(String testName){
+  public void runByName(String testNamePath){
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
@@ -214,9 +229,14 @@ public class TestHarness{
     ILogger logger = LoggerFactory.getLoggerInstance();
     
     totalNumberOfTests = 1;
-    String[] arrOfStr = testName.split(".", 2); 
-    String testClassName = arrOfStr[0];
-    Class<?> testClass = Class.forName("testClassName");
+    
+  	//Get full qualified class name from absolute path of testcase
+	 	String[] arrOfStr = testNamePath.split("src/", 2); 
+	 	arrOfStr = arrOfStr[1].split(".java", 2);
+	 	String relPath = arrOfStr[0];
+	 	String fullQualifiedClassName = relPath.replace("/",".");
+
+    Class<?> testClass = Class.forName(fullQualifiedClassName);
     Object test = testClass.getDeclaredConstructor().newInstance();
     boolean result = test.run();
     

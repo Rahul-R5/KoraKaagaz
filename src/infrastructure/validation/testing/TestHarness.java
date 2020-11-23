@@ -31,11 +31,10 @@ public class TestHarness{
   * @return ArrayList of File type containing all the test cases with valid naming
   */
   private static ArrayList<File> getAllTests(){
+    ILogger logger = LoggerFactory.getLoggerInstance();
+    ArrayList<File> allTests = new ArrayList<File>();
     try{
-      File[] modules = new File("../../../").listFiles(File::isDirectory);
-      ArrayList<File> allTests = new ArrayList<File>();
-      ILogger logger = LoggerFactory.getLoggerInstance();
-      
+      File[] modules = new File("../../../").listFiles(File::isDirectory); 
       for(File module : modules){
         if(module.isDirectory()){
           String strModule = module.getName();
@@ -66,8 +65,8 @@ public class TestHarness{
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
     
+    ILogger logger = LoggerFactory.getLoggerInstance();
     try{
-      ILogger logger = LoggerFactory.getLoggerInstance();
       String path = "../../../" + category + "/tests";
 
       File directoryPath = new File(path);
@@ -103,15 +102,16 @@ public class TestHarness{
           }   
         }
       } 
-      //result logging
-      logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
-     }
+		}
     catch (Exception e){
       logger.log(ModuleID.TEST, LogLevel.WARNING, "Exception in module: "+strModule+" >> "+e);      	
     }
+    
+    //result logging
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));  
   }
 
 
@@ -124,8 +124,8 @@ public class TestHarness{
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
     
+    ILogger logger = LoggerFactory.getLoggerInstance();
     try{
-      ILogger logger = LoggerFactory.getLoggerInstance();
       //get list of all the tests using helper static method getAllTests()
       ArrayList<File> allTests = getAllTests();
       totalNumberOfTests = allTests.size();
@@ -156,15 +156,16 @@ public class TestHarness{
            }  
         }  
       }    
-      //result logging
-      logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
      }
      catch (Exception e){
     	logger.log(ModuleID.TEST, LogLevel.WARNING, "Exception >> "+e);      	
     }
+
+    //result logging
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   }
 
 
@@ -176,12 +177,12 @@ public class TestHarness{
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
     
+    ILogger logger = LoggerFactory.getLoggerInstance();
+    //call the helper method to get list of all test cases 
+    ArrayList<File> allTests = getAllTests();
+    
     try{
-      ILogger logger = LoggerFactory.getLoggerInstance();
-      //call the helper method to get list of all test cases 
-      ArrayList<File> allTests = getAllTests();
-      totalNumberOfTests = allTests.size();
-
+	    totalNumberOfTests = allTests.size(); 
       for (File testFile : allTests){
         //Get full qualified class name from absolute path of testcase
         String absPath =  testFile.getAbsolutePath();
@@ -206,16 +207,16 @@ public class TestHarness{
           successfulNumberOfTests++;
         }
       }
-
-      //result logging 
-      logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
-    }
+		}
     catch (Exception e){
       logger.log(ModuleID.TEST, LogLevel.WARNING, "Exception >> "+e);      	
     }
+    
+    //result logging 
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
   } 
 	 
 	  
@@ -228,8 +229,8 @@ public class TestHarness{
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
     
+    ILogger logger = LoggerFactory.getLoggerInstance();
     try{
-      ILogger logger = LoggerFactory.getLoggerInstance();
       totalNumberOfTests = 1;
 
       //Get full qualified class name from absolute path of testcase
@@ -253,14 +254,16 @@ public class TestHarness{
       else{
         successfulNumberOfTests++;
       }
-
-      //result logging 
-      logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
-      logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
     }
     catch (Exception e){
       logger.log(ModuleID.TEST, LogLevel.WARNING, "Exception >> "+e);      	
     }
+      
+    //result logging 
+    logger.log(ModuleID.TEST, LogLevel.INFO, "\nOverall Result:");
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
+    logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
+  }
+	
 }

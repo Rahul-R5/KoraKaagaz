@@ -3,8 +3,8 @@
  * @module        Infrastructure module 
  * @team          Test Harness
  * @description   Test Harness main class
- * @summary       To provide functionality to tester to run test case sets in various ways- 
-                  Methods such as runAll(), runByName(), runByCategroy() and run by  Priority() are provided. 
+ * @summary       To provide functionality to tester to run test case sets in various ways, 
+                  Methods such as runAll(), runByName(), runByCategory() and runByPriority() are provided. 
  */
 package infrastructure.validation.testing;
 import java.io.File;
@@ -19,7 +19,7 @@ public class TestHarness{
   private String savePath;
   
   public void setSavePath(String path){
-    this.savePath=path;
+    this.savePath = path;
   }
   
   public String getSavePath(){
@@ -28,7 +28,7 @@ public class TestHarness{
   
   /**
   * static helper method to return all the test cases of project
-  * @return    ArrayList of File type containing all the test cases with valid naming
+  * @return ArrayList of File type containing all the test cases with valid naming
   */
   private static ArrayList<File> getAllTests(){
     File[] modules = new File("../../../").listFiles(File::isDirectory);
@@ -60,16 +60,16 @@ public class TestHarness{
 
  /**
   * Void method to run test case of a given category
-  * @param Category    The name of the category of tests to be run
+  * @param category The name of the category of the test to be run
   */
-  public void runByCategory(String Category){
+  public void runByCategory(String category){
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
     
     ILogger logger = LoggerFactory.getLoggerInstance();
     
-    String path = "../../../" + Category + "/tests";
+    String path = "../../../" + category + "/tests";
     try{
       File directoryPath = new File(path);
       //get all the test cases in tests directory of respective category 
@@ -77,21 +77,21 @@ public class TestHarness{
       totalNumberOfTests = tests.length;
       
       //create object of each test case class to run and get the result of each test
-      for(int i =0; i<tests.length; i++){
+      for(int i=0; i<tests.length; i++){
         String[] arrOfStr = tests[i].split(".", 2); 
         String testClassName = arrOfStr[0];
         Class<?> testClass = Class.forName("testClassName");
         Object test = testClass.getDeclaredConstructor().newInstance();
-        if(Category.equals(test.getCategory())){
+        if(category.equals(test.getCategory())){
           boolean result = test.run();
 
-          if(result==false){
+          if(result == false){
             failedNumberOfTests++;
-            if(failedNumberOfTests==1){
+            if(failedNumberOfTests == 1){
               logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
             }
           //log the result of failed test cases
-          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
+          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+": "+test.getError());
           }
           else{
             successfulNumberOfTests++;
@@ -101,7 +101,7 @@ public class TestHarness{
       }
     }
     catch (Exception e){
-      System.out.println("Exception in module: "+Category+" >> "+e);
+      System.out.println("Exception in module: "+category+" >> "+e);
     }
 	  
     //result logging
@@ -114,7 +114,7 @@ public class TestHarness{
 
  /**
   * Void method to run test case of a given priority
-  * @param Category    The name of the category of tests to be run
+  * @param Priority The priority level of the test to be run
   */
   public void runBypriority(int priority){
     int totalNumberOfTests = 0;
@@ -133,20 +133,20 @@ public class TestHarness{
       String testClassName = arrOfStr[0];
       Class<?> testClass = Class.forName("testClassName");
       Object test = testClass.getDeclaredConstructor().newInstance();
-      if(priority==(test.getPriority())){
+      if(priority == (test.getPriority())){
          boolean result = test.run(); 
          
-         if(result==false){
+         if(result == false){
           failedNumberOfTests++;
-          if(failedNumberOfTests==1){
+          if(failedNumberOfTests == 1){
             logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
           }
           //log the result of failed test cases
-          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
-        }
-        else{
-          successfulNumberOfTests++;
-        }
+          logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+": "+test.getError());
+         }
+         else{
+            successfulNumberOfTests++;
+         }
         
       }  
     } 
@@ -166,7 +166,6 @@ public class TestHarness{
     int totalNumberOfTests = 0;
     int successfulNumberOfTests = 0;
     int failedNumberOfTests = 0;
-    //ArrayList<File> failedTests;
     
     ILogger logger = LoggerFactory.getLoggerInstance();
      
@@ -182,17 +181,17 @@ public class TestHarness{
       Object test = testClass.getDeclaredConstructor().newInstance();
       boolean result = test.run();  
        
-      if(result==false){
+      if(result == false){
         failedNumberOfTests++;
-        if(failedNumberOfTests==1){
+        if(failedNumberOfTests == 1){
           logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
         }
         //log the result of failed test cases
-        logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
-      }
-      else{
-       successfulNumberOfTests++;
-      }
+        logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+": "+test.getError());
+       }
+       else{
+        successfulNumberOfTests++;
+       }
     }
     
     //result logging 
@@ -205,10 +204,7 @@ public class TestHarness{
 	  
  /**
   * Boolean method to give result of the Test Case Class
-  * @param testName    The absoulete path to file name of test case class including .java extension as a string
-  * @return    <code>true</code> if the test case pass 
-  *     and actual output is same as expected output; 
-  *     <code>false</code> otherwise.
+  * @param testName The absolute path to file name of test case class including .java extension as a string
   */
   public boolean runByName(String testName){
     int totalNumberOfTests = 0;
@@ -224,16 +220,16 @@ public class TestHarness{
     Object test = testClass.getDeclaredConstructor().newInstance();
     boolean result = test.run();
     
-    if(result==false){
+    if(result == false){
       failedNumberOfTests++;
-      if(failedNumberOfTests==1){
-        logger.log(ModuleID.TEST, LogLevel.INFO, "Failed Tests...");
+      if(failedNumberOfTests == 1){
+        logger.log(ModuleID.TEST, LogLevel.INFO, "\nFailed Test...");
       }
       //log the result of failed test cases
       logger.log(ModuleID.TEST, LogLevel.INFO, Integer.toString(failedNumberOfTests)+". "+testName+" :"+test.getError());
     }
     else{
-     successfulNumberOfTests++;
+      successfulNumberOfTests++;
     }
     
     //result logging 
@@ -241,8 +237,6 @@ public class TestHarness{
     logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Tests: "+Integer.toString(totalNumberOfTests));
     logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Successful Tests: "+Integer.toString(successfulNumberOfTests));
     logger.log(ModuleID.TEST, LogLevel.INFO, "Total Number of Failed Tests: "+Integer.toString(failedNumberOfTests));
-    
-    return result;
   }
 
 }

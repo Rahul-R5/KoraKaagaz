@@ -13,8 +13,6 @@ public class HarnessInstanceTest extends TestCase{
 		TestHarness th; 
 		try {
 			th = new TestHarness();
-			String testNamePath = "src/infrastructure/tests/HarnessTest.java";
-			th.runByName(testNamePath);
 		}
 		catch(Exception e) {
 			return false;

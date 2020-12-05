@@ -37,8 +37,6 @@ public class LoggerTestModeTest extends TestCase {
 			String home = System.getProperty("user.home");
 			xmlFilePath = home+"/.config/KoraKaagaz/infrastructure_logger.xml";
 		} catch (SecurityException se) {
-			// if it occurs, logFilePath reverts to the current directory where it is run
-			// or the jar default file, if its run as a jar
 			xmlFilePath = "resources/infrastructure_logger.xml";
 		} 
 		HashMap <String, String> DesiredMap = getDesiredMap();

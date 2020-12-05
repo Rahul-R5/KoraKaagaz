@@ -1,7 +1,12 @@
 package infrastructure.tests;
+import java.util.HashMap;
+import infrastructure.tests.XMLManager;
 import infrastructure.validation.logger.LoggerFactory;
 import infrastructure.validation.logger.ModuleID;
 import infrastructure.validation.logger.LogLevel;
+
+import java.util.HashMap;
+
 import infrastructure.validation.logger.ILogger;
 import infrastructure.validation.testing.TestCase;
 
@@ -11,7 +16,35 @@ public class ConsoleLoggerTest extends TestCase {
 		this.setPriority(1);
 		this.setCategory("infrastructure");
 	}
+	
+	public static HashMap <String, String> getDesiredMap() {
+    	HashMap <String, String> dict = new HashMap<String, String>();
+    	dict.put("testMode", "false");
+    	dict.put("FileLogger", "false");
+    	dict.put("ConsoleLogger", "true");
+    	dict.put("ERROR", "true");
+    	dict.put("WARNING", "true");
+    	dict.put("SUCCESS", "true");
+    	dict.put("INFO", "true");
+    	
+        return dict;
+    }
+
+    public XMLManager setup() {
+    	String xmlFilePath;
+    	try {
+			String home = System.getProperty("user.home");
+			xmlFilePath = home+"/.config/KoraKaagaz/infrastructure_logger.xml";
+		} catch (SecurityException se) {
+			xmlFilePath = "resources/infrastructure_logger.xml";
+		} 
+		HashMap <String, String> DesiredMap = getDesiredMap();
+		
+		return new XMLManager(xmlFilePath, DesiredMap);
+    }
+    
 	public boolean run(){
+		XMLManager xmlHandler = this.setup();
 		ILogger loggerInstance;
 		try {
 			loggerInstance = LoggerFactory.getLoggerInstance();
@@ -21,7 +54,7 @@ public class ConsoleLoggerTest extends TestCase {
 							module, 
 							level, 
 							"This is a call from module: " + module.toString() 
-							+ "and logLevel: " + level.toString()
+							+ " and logLevel: " + level.toString()
 					);					
 				}				
 			}
@@ -29,9 +62,10 @@ public class ConsoleLoggerTest extends TestCase {
 			
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			xmlHandler.resetLoggerXML();
 			return false;
 		}
+		xmlHandler.resetLoggerXML();
 		return true;		
 	}
 }

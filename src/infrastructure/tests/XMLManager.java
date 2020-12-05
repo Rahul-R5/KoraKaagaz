@@ -23,11 +23,13 @@ import java.util.HashMap;
 
 public class XMLManager {
 	
+	private static String xmlFilePath;
 	private Document doc;
 	private HashMap <String, String> originalMap;
 	private HashMap <String, String> desiredMap;
 	
 	public XMLManager(String xmlFilePath, HashMap <String, String> desiredMap) {		
+		this.xmlFilePath = xmlFilePath;
 		this.doc = getLoggerXML(xmlFilePath);
 		this.originalMap = getOriginalMap(doc);
 		this.desiredMap  = desiredMap;
@@ -94,7 +96,7 @@ public class XMLManager {
 	            ll.setTextContent(nodeValue);
 	            
 	        }
-	        writeLoggerXML(doc, "resources/infrastructure_logger.xml");
+	        writeLoggerXML(doc, xmlFilePath);
 	    }
 	    public void resetLoggerXML() {
 	    	
@@ -124,7 +126,7 @@ public class XMLManager {
 	            ll.setTextContent(nodeValue);
 	            
 	        }
-	        writeLoggerXML(doc, "resources/infrastructure_logger.xml");
+	        writeLoggerXML(doc, xmlFilePath);
 	    }
 	    public static HashMap <String, String> getOriginalMap(Document doc) {
 	    	HashMap <String, String> dict = new HashMap<String, String>();

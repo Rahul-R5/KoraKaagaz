@@ -21,12 +21,12 @@ public class LoggerTestModeTest extends TestCase {
     public static HashMap <String, String> getDesiredMap() {
     	HashMap <String, String> dict = new HashMap<String, String>();
     	dict.put("testMode", "true");
-    	dict.put("FileLogger", "true");
-    	dict.put("ConsoleLogger", "true");
-    	dict.put("ERROR", "true");
-    	dict.put("WARNING", "true");
-    	dict.put("SUCCESS", "true");
-    	dict.put("INFO", "true");
+    	dict.put("FileLogger", "false");
+    	dict.put("ConsoleLogger", "false");
+    	dict.put("ERROR", "false");
+    	dict.put("WARNING", "false");
+    	dict.put("SUCCESS", "false");
+    	dict.put("INFO", "false");
     	
         return dict;
     }
@@ -57,7 +57,7 @@ public class LoggerTestModeTest extends TestCase {
 							module, 
 							level, 
 							"This is a call from module: " + module.toString() 
-							+ "and logLevel: " + level.toString()
+							+ " and logLevel: " + level.toString()
 					);					
 				}				
 			}

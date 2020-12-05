@@ -1,0 +1,29 @@
+[2020:12:06 00:19:16][NETWORKING][ERROR]This is a call from module: NETWORKING and logLevel: ERROR
+[2020:12:06 00:19:16][NETWORKING][WARNING]This is a call from module: NETWORKING and logLevel: WARNING
+[2020:12:06 00:19:16][NETWORKING][SUCCESS]This is a call from module: NETWORKING and logLevel: SUCCESS
+[2020:12:06 00:19:16][NETWORKING][INFO]This is a call from module: NETWORKING and logLevel: INFO
+[2020:12:06 00:19:16][PROCESSING][ERROR]This is a call from module: PROCESSING and logLevel: ERROR
+[2020:12:06 00:19:16][PROCESSING][WARNING]This is a call from module: PROCESSING and logLevel: WARNING
+[2020:12:06 00:19:16][PROCESSING][SUCCESS]This is a call from module: PROCESSING and logLevel: SUCCESS
+[2020:12:06 00:19:16][PROCESSING][INFO]This is a call from module: PROCESSING and logLevel: INFO
+[2020:12:06 00:19:16][UI][ERROR]This is a call from module: UI and logLevel: ERROR
+[2020:12:06 00:19:16][UI][WARNING]This is a call from module: UI and logLevel: WARNING
+[2020:12:06 00:19:16][UI][SUCCESS]This is a call from module: UI and logLevel: SUCCESS
+[2020:12:06 00:19:16][UI][INFO]This is a call from module: UI and logLevel: INFO
+[2020:12:06 00:19:16][INFRASTRUCTURE][ERROR]This is a call from module: INFRASTRUCTURE and logLevel: ERROR
+[2020:12:06 00:19:16][INFRASTRUCTURE][WARNING]This is a call from module: INFRASTRUCTURE and logLevel: WARNING
+[2020:12:06 00:19:16][INFRASTRUCTURE][SUCCESS]This is a call from module: INFRASTRUCTURE and logLevel: SUCCESS
+[2020:12:06 00:19:16][INFRASTRUCTURE][INFO]This is a call from module: INFRASTRUCTURE and logLevel: INFO
+[2020:12:06 00:19:16][CONTENT][ERROR]This is a call from module: CONTENT and logLevel: ERROR
+[2020:12:06 00:19:16][CONTENT][WARNING]This is a call from module: CONTENT and logLevel: WARNING
+[2020:12:06 00:19:16][CONTENT][SUCCESS]This is a call from module: CONTENT and logLevel: SUCCESS
+[2020:12:06 00:19:16][CONTENT][INFO]This is a call from module: CONTENT and logLevel: INFO
+[2020:12:06 00:19:16][TEST][ERROR]This is a call from module: TEST and logLevel: ERROR
+[2020:12:06 00:19:16][TEST][WARNING]This is a call from module: TEST and logLevel: WARNING
+[2020:12:06 00:19:16][TEST][SUCCESS]This is a call from module: TEST and logLevel: SUCCESS
+[2020:12:06 00:19:16][TEST][INFO]This is a call from module: TEST and logLevel: INFO
+[2020:12:06 00:19:16][TEST][INFO]
+Overall Result:
+[2020:12:06 00:19:16][TEST][INFO]Total Number of Tests: 1
+[2020:12:06 00:19:16][TEST][INFO]Total Number of Successful Tests: 1
+[2020:12:06 00:19:16][TEST][INFO]Total Number of Failed Tests: 0
